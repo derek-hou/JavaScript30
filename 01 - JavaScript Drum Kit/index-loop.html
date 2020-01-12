@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Drum Kit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="play" class="keys">PLAY</div>
+<div id="stop" class="keys">STOP</div>
+
+  <div id="clap" class="keys">
+    <div data-key="65" class="key">
+      <kbd>A</kbd>
+      <span class="sound">clap</span>
+    </div>
+    <div data-key="65" class="tab"></div>
+    <div data-key="65" class="tab"></div>
+    <div data-key="65" class="tab"></div>
+    <div data-key="65" class="tab"></div>
+    <div data-key="65" class="tab"></div>
+    <div data-key="65" class="tab"></div>
+    <div data-key="65" class="tab"></div>
+    <div data-key="65" class="tab"></div>
+  </div>
+  <div id="hihat" class="keys">
+    <div data-key="83" class="key">
+      <kbd>S</kbd>
+      <span class="sound">hihat</span>
+    </div>
+    <div data-key="83" class="tab"></div>
+    <div data-key="83" class="tab"></div>
+    <div data-key="83" class="tab"></div>
+    <div data-key="83" class="tab"></div>
+    <div data-key="83" class="tab"></div>
+    <div data-key="83" class="tab"></div>
+    <div data-key="83" class="tab"></div>
+    <div data-key="83" class="tab"></div>
+  </div>
+  <div id="kick" class="keys">
+    <div data-key="68" class="key">
+      <kbd>D</kbd>
+      <span class="sound">kick</span>
+    </div>
+    <div data-key="68" class="tab"></div>
+    <div data-key="68" class="tab"></div>
+    <div data-key="68" class="tab"></div>
+    <div data-key="68" class="tab"></div>
+    <div data-key="68" class="tab"></div>
+    <div data-key="68" class="tab"></div>
+    <div data-key="68" class="tab"></div>
+    <div data-key="68" class="tab"></div>
+  </div>
+  <div id="openhihat" class="keys">
+    <div data-key="70" class="key">
+      <kbd>F</kbd>
+      <span class="sound">open hihat</span>
+    </div>
+    <div data-key="70" class="tab"></div>
+    <div data-key="70" class="tab"></div>
+    <div data-key="70" class="tab"></div>
+    <div data-key="70" class="tab"></div>
+    <div data-key="70" class="tab"></div>
+    <div data-key="70" class="tab"></div>
+    <div data-key="70" class="tab"></div>
+    <div data-key="70" class="tab"></div>
+  </div>
+  <div id="boom" class="keys">
+    <div data-key="71" class="key">
+      <kbd>G</kbd>
+      <span class="sound">boom</span>
+    </div>
+    <div data-key="71" class="tab"></div>
+    <div data-key="71" class="tab"></div>
+    <div data-key="71" class="tab"></div>
+    <div data-key="71" class="tab"></div>
+    <div data-key="71" class="tab"></div>
+    <div data-key="71" class="tab"></div>
+    <div data-key="71" class="tab"></div>
+    <div data-key="71" class="tab"></div>
+  </div>
+  <div id="ride" class="keys">  
+    <div data-key="72" class="key">
+      <kbd>H</kbd>
+      <span class="sound">ride</span>
+    </div>
+    <div data-key="72" class="tab"></div>
+    <div data-key="72" class="tab"></div>
+    <div data-key="72" class="tab"></div>
+    <div data-key="72" class="tab"></div>
+    <div data-key="72" class="tab"></div>
+    <div data-key="72" class="tab"></div>
+    <div data-key="72" class="tab"></div>
+    <div data-key="72" class="tab"></div>
+  </div>
+  <div id="snare" class="keys">
+    <div data-key="74" class="key">
+      <kbd>J</kbd>
+      <span class="sound">snare</span>
+    </div>
+    <div data-key="74" class="tab"></div>
+    <div data-key="74" class="tab"></div>
+    <div data-key="74" class="tab"></div>
+    <div data-key="74" class="tab"></div>
+    <div data-key="74" class="tab"></div>
+    <div data-key="74" class="tab"></div>
+    <div data-key="74" class="tab"></div>
+    <div data-key="74" class="tab"></div>
+  </div>
+  <div id="tom" class="keys">
+    <div data-key="75" class="key">
+      <kbd>K</kbd>
+      <span class="sound">tom</span>
+    </div>
+    <div data-key="75" class="tab"></div>
+    <div data-key="75" class="tab"></div>
+    <div data-key="75" class="tab"></div>
+    <div data-key="75" class="tab"></div>
+    <div data-key="75" class="tab"></div>
+    <div data-key="75" class="tab"></div>
+    <div data-key="75" class="tab"></div>
+    <div data-key="75" class="tab"></div>
+  </div>
+  <div id="tink" class="keys">
+    <div data-key="76" class="key">
+      <kbd>L</kbd>
+      <span class="sound">tink</span>
+    </div>
+    <div data-key="76" class="tab"></div>
+    <div data-key="76" class="tab"></div>
+    <div data-key="76" class="tab"></div>
+    <div data-key="76" class="tab"></div>
+    <div data-key="76" class="tab"></div>
+    <div data-key="76" class="tab"></div>
+    <div data-key="76" class="tab"></div>
+    <div data-key="76" class="tab"></div>
+  </div>
+  <div class="keys">
+    <div class="empty-key"></div>
+    <div class="marker"></div>
+    <div class="marker"></div>
+    <div class="marker"></div>
+    <div class="marker"></div>
+    <div class="marker"></div>
+    <div class="marker"></div>
+    <div class="marker"></div>
+    <div class="marker"></div>
+  </div>
+  
+  <audio data-key="65" src="sounds/clap.wav"></audio>
+  <audio data-key="83" src="sounds/hihat.wav"></audio>
+  <audio data-key="68" src="sounds/kick.wav"></audio>
+  <audio data-key="70" src="sounds/openhat.wav"></audio>
+  <audio data-key="71" src="sounds/boom.wav"></audio>
+  <audio data-key="72" src="sounds/ride.wav"></audio>
+  <audio data-key="74" src="sounds/snare.wav"></audio>
+  <audio data-key="75" src="sounds/tom.wav"></audio>
+  <audio data-key="76" src="sounds/tink.wav"></audio>
+
+<script>
+
+
+function playSound(e) {
+  
+  if(e.type === 'keydown') {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+     
+    if(!audio) { return } // if no audio, end the function
+    audio.currentTime = 0; // resets the sound clip from the beginning
+    audio.play(); // plays the sound
+    key.classList.add('playing'); // finally add the class to the key that has been pressed
+  } else {
+    //const audio = document.querySelector(`audio[data-key="${e.target.dataset.key}"]`);
+    const audio = document.querySelector(`audio[data-key="${e}"]`);
+    if(!audio) { return } // if no audio, end the function
+    audio.currentTime = 0; // resets the sound clip from the beginning
+    audio.play(); // plays the sound
+    //key.classList.add('playing'); // finally add the class to the key that has been pressed
+  }
+}
+
+function removeTransition(e) {
+
+  if(e.propertyName !== 'transform') { // filter out all the transitioned events that we don't want, we only want the transform property because that's the css property that changed
+    return;
+  }
+
+  this.classList.remove('playing'); // remove the class from the key
+  //console.log(e.propertyName);
+}
+
+const keys = document.querySelectorAll('.key'); // selects all the elements with class key
+
+keys.forEach(key => key.addEventListener('transitionend', removeTransition)); // add an event listener to all the keys to check for a transition
+// animationend also works the same way
+
+const markers = document.querySelectorAll('.marker'); // selects all the elements with class key
+
+markers.forEach(marker => marker.addEventListener('transitionend', removeTransition)); // add an event listener to all the markers
+
+
+function toggleTab(e) {
+  // check if toggle class already exists
+  if(e.target) {
+    if(e.target.classList.value.indexOf('toggle') > 0) { // checks if the array includes toggle
+      e.target.classList.remove('toggle');
+    } else {
+      e.target.classList.add('toggle');
+      //playSound(e);
+    }
+  }
+}
+
+let tabs = document.querySelectorAll('.tab'); // selects all the elements with class tab
+
+tabs.forEach(tab => tab.addEventListener('click', toggleTab));
+
+const clapSounds = [];
+const hihatSounds = [];
+const kickSounds = [];
+const openhihatSounds = [];
+const boomSounds = [];
+const rideSounds = [];
+const snareSounds = [];
+const tomSounds = [];
+const tinkSounds = [];
+
+const clapTabs = document.querySelectorAll('#clap .tab');
+const hihatTabs = document.querySelectorAll('#hihat .tab');
+const kickTabs = document.querySelectorAll('#kick .tab');
+const openhihatTabs = document.querySelectorAll('#openhihat .tab');
+const boomTabs = document.querySelectorAll('#boom .tab');
+const rideTabs = document.querySelectorAll('#ride .tab');
+const snareTabs = document.querySelectorAll('#snare .tab');
+const tomTabs = document.querySelectorAll('#tom .tab');
+const tinkTabs = document.querySelectorAll('#tink .tab');
+
+const playButton = document.querySelector('#play');
+const stopButton = document.querySelector('#stop');
+
+let topLoop;
+
+function resetTab() {
+  // check if the loop array is populated, if not add the tabs, else clear it
+  if(clapSounds.length === 0) {
+    clapTabs.forEach(tab => clapSounds.push(tab));
+  } else { // reset
+    while (clapSounds.length > 0) {
+      clapSounds.pop();
+    }
+  }
+
+  if(hihatSounds.length === 0) {
+    hihatTabs.forEach(tab => hihatSounds.push(tab));
+  } else { // reset
+    while (hihatSounds.length > 0) {
+      hihatSounds.pop();
+    }
+  }
+
+  if(kickSounds.length === 0) {
+    kickTabs.forEach(tab => kickSounds.push(tab));
+  } else { // reset
+    while (kickSounds.length > 0) {
+      kickSounds.pop();
+    }
+  }
+
+  if(openhihatSounds.length === 0) {
+    openhihatTabs.forEach(tab => openhihatSounds.push(tab));
+  } else { // reset
+    while (openhihatSounds.length > 0) {
+      openhihatSounds.pop();
+    }
+  }
+
+  if(boomSounds.length === 0) {
+    boomTabs.forEach(tab => boomSounds.push(tab));
+  } else { // reset
+    while (boomSounds.length > 0) {
+      boomSounds.pop();
+    }
+  }
+  
+  if(rideSounds.length === 0) {
+    rideTabs.forEach(tab => rideSounds.push(tab));
+  } else { // reset
+    while (rideSounds.length > 0) {
+      rideSounds.pop();
+    }
+  }
+
+  if(snareSounds.length === 0) {
+    snareTabs.forEach(tab => snareSounds.push(tab));
+  } else { // reset
+    while (snareSounds.length > 0) {
+      snareSounds.pop();
+    }
+  }
+
+  if(tomSounds.length === 0) {
+    tomTabs.forEach(tab => tomSounds.push(tab));
+  } else { // reset
+    while (tomSounds.length > 0) {
+      tomSounds.pop();
+    }
+  }
+
+  if(tinkSounds.length === 0) {
+    tinkTabs.forEach(tab => tinkSounds.push(tab));
+  } else { // reset
+    while (tinkSounds.length > 0) {
+      tinkSounds.pop();
+    }
+  }
+}
+
+function playLoop(e) {
+  let j = 0;
+  let beats = 4;
+  let bpm = 60;
+
+  // checks if play button is already toggled
+  if(e.target.classList.value.indexOf('toggle') < 0) {
+    e.target.classList.add('toggle');
+    resetTab();
+    //console.log(arrClass.includes('toggle'));
+    //while(e.target.classList.value.indexOf('toggle') > 0) {
+    // setInterval
+    topLoop = setInterval(function () {
+      // loop through the of the inner array only 1 item at a time
+      
+      if(clapSounds[j].getAttribute("class").indexOf('toggle') > 0) {
+        playSound(clapSounds[j].dataset.key);
+      }
+
+      if(hihatSounds[j].getAttribute("class").indexOf('toggle') > 0) {
+        playSound(hihatSounds[j].dataset.key);
+      }
+
+      if(kickSounds[j].getAttribute("class").indexOf('toggle') > 0) {
+        playSound(kickSounds[j].dataset.key);
+      }
+
+      if(openhihatSounds[j].getAttribute("class").indexOf('toggle') > 0) {
+        playSound(openhihatSounds[j].dataset.key);
+      }
+
+      if(boomSounds[j].getAttribute("class").indexOf('toggle') > 0) {
+        playSound(boomSounds[j].dataset.key);
+      }
+
+      if(rideSounds[j].getAttribute("class").indexOf('toggle') > 0) {
+        playSound(rideSounds[j].dataset.key);
+      }
+
+      if(snareSounds[j].getAttribute("class").indexOf('toggle') > 0) {
+        playSound(snareSounds[j].dataset.key);
+      }
+
+      if(tomSounds[j].getAttribute("class").indexOf('toggle') > 0) {
+        playSound(tomSounds[j].dataset.key);
+      }
+
+      if(tinkSounds[j].getAttribute("class").indexOf('toggle') > 0) {
+        playSound(tinkSounds[j].dataset.key);
+      }
+
+      markers[j].classList.add('playing'); // add marker css
+      //console.log(playSounds[j]);
+      
+      // if we reach the end of the array, reset i back to zero and increment j
+      if(j===markers.length-1) {
+        j = 0;
+      } else {
+        j++;
+      }
+    }, 1000);
+  }
+}
+
+function stopLoop (e) {
+  if (topLoop) {
+    e.target.classList.add('playing'); // adds transition to stop
+    if(playButton.classList.value.indexOf('toggle') > 0) { // checks if the array includes toggle
+      playButton.classList.remove('toggle');
+    }
+    resetTab();
+    clearInterval(topLoop);
+  }
+}
+
+ 
+
+playButton.addEventListener ('click', playLoop);
+stopButton.addEventListener ('click', stopLoop);
+stopButton.addEventListener('transitionend', removeTransition);
+window.addEventListener ('keydown', playSound); // have the window listen for a keydown press
+
+</script>
+
+
+</body>
+</html>

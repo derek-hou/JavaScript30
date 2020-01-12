@@ -58,6 +58,31 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+function playSound(e) {
+  const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+  const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+   
+  if(!audio) { return } // if no data key is pressed, end the function
+  audio.currentTime = 0; // resets the sound clip from the beginning
+  audio.play(); // plays the sound
+  key.classList.add('playing'); // finally add the class to the key that has been pressed
+
+}
+
+function removeTransition(e) {
+  if(e.propertyName !== 'transform') { // filter out all the transitioned events that we don't want, we only want the transform property because that's the css property that changed
+    return;
+  }
+
+  this.classList.remove('playing'); // remove the class from the key
+  //console.log(e.propertyName);
+}
+
+const keys = document.querySelectorAll('.key'); // selects all the elements with class key
+
+keys.forEach(key => key.addEventListener('transitionend', removeTransition)); // add an event listener to all the keys to check for a transition
+// animationend also works the same way
+window.addEventListener ('keydown', playSound); // have the window listen for a keydown press
 
 </script>
 
