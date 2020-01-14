@@ -21,6 +21,23 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
+    /* Note you can scope these variables to specific elements lower in the hierarchy which will take prescedence
+     */ 
+    :root {
+      --base: #ffc600;
+      --spacing: 10px;
+      --blur: 10px;
+    }
+
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+
+    h1 {
+      color: var(--base);
+    }
 
     /*
       misc styles, nothing to do with CSS variables
@@ -39,12 +56,33 @@
       margin-bottom: 50px;
     }
 
+    a {
+      color: var(--base);
+      text-decoration: none;
+    }
+
     input {
       width: 100px;
     }
   </style>
 
   <script>
+    const inputs = document.querySelectorAll('.controls input');
+
+    /* 
+     * note: nodelist != array
+     * nodelist can be converted to an array
+     * nodelist now has foreach built in
+     */
+
+    function handleUpdate() {
+      const suffix = this.dataset.sizing || ''; // grabs dataset or nothing i.e. 'px' or blank in the case of color
+      // Note: dataset grabs all attributes that start with 'data-' in the element
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+    }
+
+    inputs.forEach(input => input.addEventListener('change', handleUpdate));
+    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
   </script>
 
 </body>
