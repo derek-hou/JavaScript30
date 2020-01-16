@@ -200,16 +200,9 @@ const markers = document.querySelectorAll('.marker'); // selects all the element
 
 markers.forEach(marker => marker.addEventListener('transitionend', removeTransition)); // add an event listener to all the markers
 
-
 function toggleTab(e) {
-  // check if toggle class already exists
   if(e.target) {
-    if(e.target.classList.value.indexOf('toggle') > 0) { // checks if the array includes toggle
-      e.target.classList.remove('toggle');
-    } else {
-      e.target.classList.add('toggle');
-      //playSound(e);
-    }
+    e.target.classList.toggle('toggle');
   }
 }
 
