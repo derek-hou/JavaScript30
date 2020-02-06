@@ -3,17 +3,278 @@
 <head>
   <meta charset="UTF-8">
   <title>HTML5 Canvas</title>
+
 </head>
 <body>
-<canvas id="draw" width="800" height="800"></canvas>
-<script>
-</script>
+  <header>
+    <nav>
+      <input id="colorpicker" type="color" value="#000000">
+      <button id="increment" name="increment" type="button">+</button>
+      <button id="decrement" name="decrement" type="button">-</button>
+      <button id="addLayer" name="layer" type="button">Add Layer</button>
+    </nav>
+  </header>
+  <main>
+    <section id="artboard">
+      <canvas id="layer-1" width="800" height="800"></canvas>
+    </section>
+    <section id="layers">
+      <div class="layer-options-container">
+        <button id="layer-1-select" name="layer" type="button" data-layer="1">Layer 1</button>
+        <label for="layer-1-check">hide</label><input id="layer-1-check" name="layer-check" type="checkbox" data-layer="1"></input>
+      </div>
+    </section>
+  </main>
+  <script>
+  let layerCount = 1;
+  let canvas = document.querySelector('#layer-1');
+  let ctx = canvas.getContext('2d');
+  /*canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;*/
+  //ctx.strokeStyle = '#BADA55';
+  ctx.lineJoin = 'round';
+  ctx.lineCap = 'round';
+  ctx.lineWidth = 5;
+  let isDrawing = false;
+  let lastX = 0;
+  let lastY = 0;
+  /*let hue = 0;
+  let direction = true;*/
 
-<style>
+  function draw(e) {
+  	if(!isDrawing) return; // stop the fn from running when they are not moused down
+  	
+  	//ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+
+  	ctx.beginPath(); // starts the line
+
+  	// start point
+  	ctx.moveTo(lastX, lastY);
+
+  	// end point
+  	ctx.lineTo(e.offsetX, e.offsetY);
+  	ctx.stroke(); // starts the drawing
+  	[lastX, lastY] = [e.offsetX, e.offsetY]; // destructuring array
+
+  	/*hue++;
+  	if(hue >= 360) {
+  		hue =0; // reset the hue
+  	}
+
+  	if(ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
+  		direction = !direction;
+  	}
+
+  	if(direction) {
+  		ctx.lineWidth++;
+  	} else {
+  		ctx.lineWidth--;
+  	*/
+  }
+
+  canvas.addEventListener('mousemove', draw);
+  canvas.addEventListener('mousedown', (e) => {
+  	isDrawing = true;
+  	[lastX, lastY] = [e.offsetX, e.offsetY];
+  });
+
+  canvas.addEventListener('mouseup', () => isDrawing = false);
+  canvas.addEventListener('mouseout', () => isDrawing = false); // sets isDraw when mouse goes out of the window
+
+  // Function and Event Listener for changing the color of the brush
+  function selectColor(e) {
+    //const suffix = this.dataset.sizing || ''; // grabs dataset or nothing i.e. 'px' or blank in the case of color
+    // Note: dataset grabs all attributes that start with 'data-' in the element
+    ctx.strokeStyle = this.value;
+  }
+
+  const colorpicker = document.querySelector('#colorpicker');
+
+  colorpicker.addEventListener('change', selectColor);
+
+  // Function and Event Listener for changing the brush size
+  function handleSizing(e) {
+    //const suffix = this.dataset.sizing || ''; // grabs dataset or nothing i.e. 'px' or blank in the case of color
+    // Note: dataset grabs all attributes that start with 'data-' in the element
+    console.log(e);
+    if(this.name === 'increment') {
+      ctx.lineWidth++;
+    } else if (this.name === 'decrement') {
+      ctx.lineWidth--;
+    } else {
+
+    }
+  }
+
+  const sizebuttons = document.querySelectorAll('#increment, #decrement');
+
+  sizebuttons.forEach(button => button.addEventListener('click', handleSizing));
+
+  // Function and Event Listener for adding a new layer
+  function addLayer () {
+    layerCount++; // increment the layer count
+    const newLayer = document.createElement("canvas"); // create new canvas element
+    newLayer.setAttribute('id', `layer-${layerCount}`);
+    newLayer.setAttribute('width', 800);
+    newLayer.setAttribute('height', 800);
+    newLayer.setAttribute('class', 'top-layer'); // sets this new layer as the top layer
+
+    // set ctx variable to new layer
+    ctx = newLayer.getContext('2d');
+    isDrawing = false;
+    /*lastX = 0;
+    lastY = 0;*/
+
+    // add new layer to board element
+    const board = document.querySelector('#artboard');
+    board.appendChild(newLayer); // element now exists in the DOM
+
+    // add event listeners to new layer to be able to draw on it immediately
+    newLayer.addEventListener('mousemove', draw);
+    newLayer.addEventListener('mousedown', (e) => {
+      isDrawing = true;
+      [lastX, lastY] = [e.offsetX, e.offsetY];
+    });
+
+    newLayer.addEventListener('mouseup', () => isDrawing = false);
+    newLayer.addEventListener('mouseout', () => isDrawing = false); // sets isDraw when mouse goes out of the window
+
+    const newLayerOptionsContainer = document.createElement("div"); // create a new button element
+    newLayerOptionsContainer.setAttribute('class', 'layer-options-container');
+
+    const newLayerSelectButton = document.createElement("button"); // create a new button element
+    newLayerSelectButton.setAttribute('id', `layer-${layerCount}-select`);
+    newLayerSelectButton.setAttribute('name', 'layer');
+    newLayerSelectButton.setAttribute('type', 'button');
+    newLayerSelectButton.setAttribute('data-layer', layerCount);
+    newLayerSelectButton.innerHTML = `Layer ${layerCount}`;
+
+    const newLayerHideCheckboxLabel = document.createElement("label"); // create a new button element
+    newLayerHideCheckboxLabel.setAttribute('for', `layer-${layerCount}-check`);
+    newLayerHideCheckboxLabel.innerHTML = "hide";
+
+    const newLayerHideCheckbox = document.createElement("input"); // create a new button element
+    newLayerHideCheckbox.setAttribute('id', `layer-${layerCount}-check`);
+    newLayerHideCheckbox.setAttribute('name', 'layer-check');
+    newLayerHideCheckbox.setAttribute('type', 'checkbox');
+    newLayerHideCheckbox.setAttribute('data-layer', layerCount);
+    
+    newLayerOptionsContainer.appendChild(newLayerSelectButton);
+    newLayerOptionsContainer.appendChild(newLayerHideCheckboxLabel);    
+    newLayerOptionsContainer.appendChild(newLayerHideCheckbox);
+
+    // add new layer select button to layers element
+    const layers = document.querySelector('#layers');
+    layers.appendChild(newLayerOptionsContainer); // element now exists in the DOM
+
+    // add event listener to new layer's hide button
+    const newHideCheckbox = document.querySelector(`#layer-${layerCount}-check`);
+    newHideCheckbox.addEventListener('change', hideLayer);
+
+    // add event listener to new layer select button
+    const newLayerSelect = document.querySelector(`#layer-${layerCount}-select`);
+    newLayerSelect.addEventListener('click', selectLayer);
+  }
+
+  const addLayerbutton = document.querySelector('#addLayer');
+
+  addLayerbutton.addEventListener('click', addLayer);
+
+  function hideLayer(e) {
+    if (e.target.checked === true) {
+      // hide layer
+      const layer = document.querySelector(`#layer-${e.target.dataset.layer}`);
+      let classes = layer.getAttribute('class');
+      if (classes === null) {
+        layer.setAttribute('class', 'hide');
+      } else {
+        layer.setAttribute('class', classes + ' hide');
+      }
+
+      
+    } else {
+      // unhide layer
+      const layer = document.querySelector(`#layer-${e.target.dataset.layer}`);
+      let classes = layer.getAttribute('class')
+      if (classes.substr('hide' > 0)) {
+        let classArray = classes.split(' ');
+        console.log(classArray);
+        console.log(classArray.indexOf('hide'));
+        let classArraySplice = classArray.splice(classArray.indexOf('hide'), 1);
+        console.log(classArray);
+        classes = classArray.join(' ');
+        layer.setAttribute('class',classes)
+      }
+    }
+  }
+
+  // add event listener to new layer's hide button
+  const hideCheckbox = document.querySelector(`#layer-${layerCount}-check`);
+  hideCheckbox.addEventListener('change', hideLayer);
+
+  function selectLayer(e) {
+    const selectedLayer = document.querySelector(`#layer-${e.target.dataset.layer}`);
+    ctx = selectedLayer.getContext('2d');
+    isDrawing = false;
+  }
+
+  // add event listener to new layer select button
+  const newLayerSelect = document.querySelector(`#layer-${layerCount}-select`);
+  newLayerSelect.addEventListener('click', selectLayer);
+
+  
+
+  </script>
+  <style>
   html, body {
     margin: 0;
   }
-</style>
 
+  main {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  #layers {
+    width: 20%;
+  }
+
+  #artboard {
+      /**
+       * Position relative so that canvas elements
+       * inside of it will be relative to the parent
+       */
+      position: relative;
+      width: 80%;
+  }
+
+  canvas {
+      /**
+       * Position absolute provides canvases to be able
+       * to be layered on top of each other
+       * Be sure to remember a z-index!
+       */
+      width: 800px;
+      height: 800px;
+      position: absolute;
+      z-index: 1;
+  }
+
+  .top-layer {
+    z-index: 100;
+  }
+
+  .hide {
+    /*display: none;*/
+    visibility: hidden;
+  }
+
+  canvas {
+    /**
+     * Set transparent to let any other canvases render through
+     */
+    background-color: transparent;
+  }
+  </style>
 </body>
 </html>
