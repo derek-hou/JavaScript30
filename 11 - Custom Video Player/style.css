@@ -42,7 +42,7 @@ body {
   width: 100%;
 }
 
-.player__button {
+.player__button, .screen-size {
   background: none;
   border: 0;
   line-height: 1;
@@ -101,7 +101,7 @@ body {
   width: 50%;
   background: #ffc600;
   flex: 0;
-  flex-basis: 50%;
+  flex-basis: 0%;
 }
 
 /* unholy css to style input type="range" */
