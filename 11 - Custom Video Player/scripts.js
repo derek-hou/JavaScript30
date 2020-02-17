@@ -45,12 +45,14 @@ function scrub(e) {
 }
 
 function handleScreenSize() {
-	console.dir(video);
-	if(!video.webkitDisplayingFullscreen) {
-		video.requestFullscreen();
-	} else {
+	if(!document.fullscreenElement) {
+		console.dir(video);
+		video.requestFullscreen(function() {
+			
+		});
+	}/* else {
 		video.exitFullscreen();
-	}
+	}*/
 }
 
 /* Add event listeners */
@@ -58,7 +60,7 @@ video.addEventListener('click', togglePlay);
 video.addEventListener('play', updateButton);
 video.addEventListener('pause', updateButton);
 video.addEventListener('timeupdate', handleProgress);
-video.addEventListener('fullscreenchange', handleScreenSize);
+video.addEventListener('onresize', handleScreenSize);
 
 toggle.addEventListener('click', togglePlay);
 
