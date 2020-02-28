@@ -7,6 +7,26 @@
 </head>
 <body>
 <script>
+const pressed = [];
+const secretCode = [38,38,40,40,37,39,37,39,65,66,16,13];
+
+window.addEventListener('keyup', (e) => {
+
+	pressed.push(e.keyCode);
+	pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
+
+	let equalFlag = true;
+	for(let i = 0; i < secretCode.length; i++) {
+		if(secretCode[i] != pressed[i]) {
+			equalFlag = false;
+		}
+	}
+	
+	if(equalFlag) {
+		cornify_add();
+		//console.log(pressed);
+	}
+});
 </script>
 </body>
 </html>

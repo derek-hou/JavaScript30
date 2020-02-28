@@ -50,9 +50,7 @@ function handleScreenSize() {
 		video.requestFullscreen(function() {
 			
 		});
-	}/* else {
-		video.exitFullscreen();
-	}*/
+	}
 }
 
 /* Add event listeners */
