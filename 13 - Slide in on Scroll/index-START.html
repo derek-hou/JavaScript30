@@ -43,7 +43,7 @@
   </div>
 
   <script>
-    function debounce(func, wait = 20, immediate = true) {
+    function debounce(func, wait = 50, immediate = true) {
       var timeout;
       return function() {
         var context = this, args = arguments;
@@ -57,6 +57,41 @@
         if (callNow) func.apply(context, args);
       };
     }
+
+    function slideImages(e) {
+      imgs.forEach(img => {
+        // halfway through the image
+        console.log('scrollY', window.scrollY);
+        console.log('innerHeight', window.innerHeight);
+        console.log('image', img.height/2);
+        const slideInAt = (window.scrollY + window.innerHeight - img.height/2);
+        console.log('slideInAt', slideInAt);
+        
+        // bottom of the image
+        const imgBottom = img.offsetTop + img.height; // offsetTop is where the top of the image is with respect to where how far down it is in the web page, and to get the bottom of the image, add the height of the image
+        console.log('imgBottom', imgBottom);
+        // so imgBottom will get the bottom of the image with respect to where it is on the web page
+        
+        const isHalfShown = slideInAt > img.offsetTop; // if the slideInAt value is lower than the top of the image with respect to where it is on the page
+        console.log('isHalfShown', isHalfShown);
+        
+        const isNotScrolledPast = window.scrollY < imgBottom; // if we have not scrolled past the bottom of the image
+        console.log('isNotScrolledPast', isNotScrolledPast);
+        
+        console.count('slide');
+        if(isHalfShown && isNotScrolledPast) {
+          img.classList.add('active');
+        } else {
+          img.classList.remove('active');
+        }
+        //console.log(window.scrollY, slideInAt,imgBottom,isHalfShown,isNotScrolledPast);
+      });
+    }
+
+    let imgs = document.querySelectorAll('.slide-in');
+
+    window.addEventListener('scroll', debounce(slideImages));
+
 
   </script>
 
