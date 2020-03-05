@@ -47,7 +47,35 @@
 
 <script>
 const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+const articles = ['the','an', 'a'];
 
+let sortedBands = bands.sort(function(a, b) {
+  let firstWordA = articles.includes(a.substring(0,a.indexOf(' ')).toLowerCase()) ? true : false; // check the first word to see if it includes an article
+
+  let nameA = firstWordA ? a.substring(a.indexOf(' ')+1,a.length) : a; // if the first word does contain an article, start comparing at the second word, else use the full word
+
+  // do the same for b
+  let firstWordB = articles.includes(b.substring(0,b.indexOf(' ')).toLowerCase()) ? true : false; // check the first word to see if it includes an article
+
+  let nameB = firstWordB ? b.substring(b.indexOf(' ')+1,b.length) : b; // if the first word does contain an article, start comparing at the second word, else use the full word
+
+  if(nameA < nameB) {
+    return -1; // don't swap
+  } else {
+    return 1; // swap
+  }
+  
+});
+
+const elBands = document.querySelector('#bands');
+
+
+elBands.innerHTML = 
+  sortedBands
+  .map((band) => `<li>${band}</li>`)
+  .join('');
+
+console.log(bands);
 
 </script>
 
